@@ -343,8 +343,8 @@
       <div class="time-col"><div class="time-badge">5 min</div></div>
       <div class="activity-body">
         <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
-        <div class="activity-name">Token efficiency — first principles</div>
-        <div class="activity-desc">Introduce the context window with a simple analogy: Claude Code's short-term working memory. Show what happens when a session grows too long. Teach two habits: <code>/compact</code> (summarise and continue) and <code>/clear</code> (start fresh for a new task). Connect to cost — fewer tokens used = lower API spend per session. Note that VS Code's Claude Code panel shows session length visually, which helps.</div>
+        <div class="activity-name">Workflow design — script what repeats, Claude what varies</div>
+        <div class="activity-desc">Introduce the central principle for working with Claude Code sustainably: <strong>script what repeats, Claude what varies.</strong> Any workflow can be split at a line. Steps that always produce the same output given the same input — processing every row in a CSV, creating tickets from a template, renaming files by a fixed rule — belong in code. Scripts execute identically every time; that predictability and reliability is the point. Claude's job for these tasks is a one-time act: write the script, then step back. The rule of thumb: "Claude thinks once. Code runs many times."<br><br>Steps that require judgment — interpreting an ambiguous ticket, deciding how to categorise an edge case, drafting a contextual response — belong with Claude. These are the gaps where intelligence earns its place. Token savings is a side effect of this principle, not the motivation. The motivation is reliable, predictable output at scale, with intelligence inserted only where the answer genuinely varies.<br><br>Practical habits that follow: <code>/compact</code> (summarise and continue when a session grows long) and <code>/clear</code> (start fresh when switching to a new task).</div>
       </div>
     </div>
     <div class="callout accent">
@@ -413,7 +413,7 @@
       <div class="activity-body">
         <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
         <div class="activity-name">Token efficiency — advanced habits</div>
-        <div class="activity-desc">Introduce <code>.claudeignore</code> to exclude large or irrelevant folders (attachments, exports, archives) from Claude Code's context. Show how a well-scoped VS Code workspace costs fewer tokens and produces more focused output. Revisit CLAUDE.md as a token-efficiency tool — explicit instructions prevent Claude from spending tokens guessing your intent.</div>
+        <div class="activity-desc">Connect the workflow design principle to Claude Code's configuration tools. <code>.claudeignore</code> is how you tell Claude which parts of your project sit in the "repeats" column — attachments, archives, exports — things that don't need reasoning and should be invisible to it. Excluding them keeps Claude's attention on the parts that actually vary and require intelligence.<br><br><code>CLAUDE.md</code> is the inverse: it codifies the parts of your context that repeat — project conventions, team preferences, naming rules, workflow patterns — so Claude never has to reason about them from scratch again. Think of it as pre-loading your second brain with everything it should already know about your project.<br><br>Together, these tools sharpen where Claude's intelligence actually lands: less noise, more signal, more reliable output.</div>
       </div>
     </div>
     <div class="activity">
@@ -452,24 +452,4 @@
       <div class="session-info">
         <div class="session-title">Pre-session checklist</div>
         <div class="session-meta-row">Send to participants at least 48 hours before Session 1</div>
-        <div class="session-goal"><strong>Goal:</strong> arrive at Session 1 with zero blockers so the full 60 minutes can be used for learning, not troubleshooting accounts or missing software.</div>
-      </div>
-    </div>
-    <div class="check-section">
-      <div class="check-section-title">All participants</div>
-      <div class="activity">
-        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
-        <div class="activity-body">
-          <div class="activity-name">Confirm Anthropic account access</div>
-          <div class="activity-desc">Log in to <code>claude.ai</code> and verify your account works. If you use a Claude Pro or team plan, confirm billing is active — Claude Code draws from the same account.</div>
-        </div>
-      </div>
-      <div class="activity">
-        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
-        <div class="activity-body">
-          <div class="activity-name">Install or verify VS Code</div>
-          <div class="activity-desc">Download VS Code from <code>code.visualstudio.com</code> if not already installed. Open it and confirm it launches. We will install the Claude Code extension together in Session 1, but VS Code itself must be ready.</div>
-        </div>
-      </div>
-      <div class="activity">
-        <div class="t
+        <div class="session-goal"><strong>Goal:</strong> arrive at Session 1 w

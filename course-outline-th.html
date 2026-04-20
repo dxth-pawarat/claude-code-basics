@@ -359,8 +359,8 @@
       <div class="time-col"><div class="time-badge">5 min</div></div>
       <div class="activity-body">
         <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
-        <div class="activity-name">Token efficiency — first principles</div>
-        <div class="activity-desc">แนะนำ context window ด้วย analogy ง่ายๆ: หน่วยความจำระยะสั้นในการทำงานของ Claude Code แสดงให้เห็นว่าเกิดอะไรขึ้นเมื่อเซสชันยาวเกินไป สอน 2 นิสัย: <code>/compact</code> (สรุปและทำต่อ) และ <code>/clear</code> (เริ่มใหม่สำหรับงานใหม่) เชื่อมโยงกับค่าใช้จ่าย — ใช้ token น้อยลง = ค่า API ต่อเซสชันถูกลง สังเกตว่า panel ของ Claude Code ใน VS Code แสดงความยาวเซสชันแบบ visual ซึ่งช่วยได้</div>
+        <div class="activity-name">Workflow design — script what repeats, Claude what varies</div>
+        <div class="activity-desc">แนะนำหลักการสำคัญสำหรับการทำงานกับ Claude Code อย่างยั่งยืน: <strong>script what repeats, Claude what varies</strong> — สคริปต์สิ่งที่ทำซ้ำ ใช้ Claude กับสิ่งที่แปรเปลี่ยน ทุก workflow สามารถแบ่งออกตามเส้นแบ่งนี้ ขั้นตอนที่ให้ผลลัพธ์เหมือนกันทุกครั้ง — ประมวลผลทุก row ใน CSV, สร้าง tickets จาก template, เปลี่ยนชื่อไฟล์ตามกฎที่กำหนด — สิ่งเหล่านี้ควรเป็น script เพราะ script รันเหมือนกันทุกครั้ง ความน่าเชื่อถือและความคาดเดาได้นั้นคือจุดประสงค์ หน้าที่ของ Claude สำหรับงานเหล่านี้คือการกระทำครั้งเดียว: เขียน script แล้วถอยออกมา กฎง่ายๆ: "Claude thinks once. Code runs many times."<br><br>ขั้นตอนที่ต้องการการตัดสินใจ — ตีความ ticket ที่กำกวม, ตัดสินใจจัดหมวดหมู่ edge case, ร่างคำตอบที่ต้องอาศัย context — สิ่งเหล่านี้ควรอยู่กับ Claude เพราะนี่คือช่องว่างที่ intelligence สร้างคุณค่า การประหยัด token เป็นผลพลอยได้ ไม่ใช่แรงจูงใจ แรงจูงใจที่แท้จริงคือผลลัพธ์ที่น่าเชื่อถือและคาดเดาได้ในระดับ scale โดยใส่ intelligence เข้าไปเฉพาะตรงที่คำตอบ "แปรเปลี่ยน" จริงๆ<br><br>นิสัยปฏิบัติที่ตามมา: <code>/compact</code> (สรุปและทำต่อเมื่อเซสชันยาวเกินไป) และ <code>/clear</code> (เริ่มใหม่เมื่อเปลี่ยนไปทำงานใหม่)</div>
       </div>
     </div>
 
@@ -437,7 +437,7 @@
       <div class="activity-body">
         <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
         <div class="activity-name">Token efficiency — advanced habits</div>
-        <div class="activity-desc">แนะนำ <code>.claudeignore</code> เพื่อยกเว้นโฟลเดอร์ขนาดใหญ่หรือที่ไม่เกี่ยวข้อง (attachments, exports, archives) ออกจาก context ของ Claude Code แสดงให้เห็นว่า VS Code workspace ที่ scope ดีช่วยลดการใช้ token และให้ผลลัพธ์ที่ focused มากขึ้น กลับมาที่ CLAUDE.md ในฐานะ token-efficiency tool — คำสั่งที่ชัดเจนป้องกัน Claude จากการใช้ token ไปกับการเดาเจตนาของคุณ</div>
+        <div class="activity-desc">เชื่อมหลักการ workflow design เข้ากับ configuration tools ของ Claude Code <code>.claudeignore</code> คือวิธีที่คุณบอก Claude ว่าส่วนใดของโปรเจกต์อยู่ใน "repeats column" — attachments, archives, exports — สิ่งที่ไม่ต้องการ reasoning และควรมองไม่เห็น การยกเว้นสิ่งเหล่านี้ช่วยให้ Claude focused อยู่กับส่วนที่ "varies" และต้องการ intelligence จริงๆ<br><br><code>CLAUDE.md</code> คือสิ่งตรงข้าม: มันเข้ารหัสส่วนของ context ที่ซ้ำๆ — project conventions, team preferences, naming rules, workflow patterns — เพื่อให้ Claude ไม่ต้อง reason เกี่ยวกับสิ่งเหล่านี้ตั้งแต่ต้นอีก คิดว่ามันคือการ pre-load second brain ของคุณด้วยทุกสิ่งที่มันควรรู้เกี่ยวกับโปรเจกต์แล้ว<br><br>เครื่องมือทั้งสองช่วยเพิ่มความคมชัดให้กับตำแหน่งที่ intelligence ของ Claude ลงจอดจริงๆ: noise น้อยลง signal มากขึ้น ผลลัพธ์น่าเชื่อถือมากขึ้น</div>
       </div>
     </div>
 
@@ -453,41 +453,4 @@
     <div class="activity">
       <div class="time-col"><div class="time-badge">5 min</div></div>
       <div class="activity-body">
-        <div class="activity-tags"><span class="tag tag-reflect">wrap-up</span></div>
-        <div class="activity-name">Personal commitment</div>
-        <div class="activity-desc">ผู้เข้าร่วมแต่ละคนระบุงานหนึ่งอย่างที่จะ automate ด้วย Claude Code ภายในสองสัปดาห์ข้างหน้า — เขียนลง สร้างความรับผิดชอบโดยไม่กดดัน และให้คุณมีจุดเริ่มต้นสำหรับการติดตามผลตามธรรมชาติ</div>
-      </div>
-    </div>
-
-    <div class="time-bar-wrap">
-      <div class="time-bar-label">Time distribution</div>
-      <div class="time-bar">
-        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
-        <div class="time-bar-seg" style="flex:15;background:#fff7ed;"></div>
-        <div class="time-bar-seg" style="flex:15;background:#dbeafe;"></div>
-        <div class="time-bar-seg" style="flex:10;background:#dbeafe;"></div>
-        <div class="time-bar-seg" style="flex:8;background:#dbeafe;"></div>
-        <div class="time-bar-seg" style="flex:7;background:#e0e7ff;"></div>
-        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ PRE-SESSION CHECKLIST ═══ -->
-  <div class="panel" id="pre">
-    <div class="session-hero">
-      <div class="session-stripe s0-color"></div>
-      <div class="session-info">
-        <div class="session-title">Pre-session checklist</div>
-        <div class="session-meta-row">ส่งให้ผู้เข้าร่วมอย่างน้อย 48 ชั่วโมงก่อน Session 1</div>
-        <div class="session-goal"><strong>เป้าหมาย:</strong> มาถึง Session 1 โดยไม่มีสิ่งกีดขวาง เพื่อให้ใช้เวลา 60 นาทีเต็มไปกับการเรียนรู้ ไม่ใช่การแก้ปัญหาบัญชีหรือซอฟต์แวร์ที่ขาดหายไป</div>
-      </div>
-    </div>
-
-    <div class="check-section">
-      <div class="check-section-title">ผู้เข้าร่วมทุกคน</div>
-      <div class="activity">
-        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
-        <div class="activity-body">
-          <div class="activity-name">ยืนยันการเข้าถึงบัญชี Anthropic</div>
-          <div class
+        <div class="activity-ta
