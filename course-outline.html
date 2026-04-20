@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — IT Team Course Outline</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --border: #e4e2db;
+    --border-light: #eeece6;
+    --text-primary: #1a1917;
+    --text-secondary: #6b6963;
+    --text-tertiary: #a09d97;
+    --accent: #2563eb;
+    --accent-bg: #eff6ff;
+    --tag-orient-bg: #f0effe; --tag-orient: #4338ca;
+    --tag-hands-bg: #ecfdf5; --tag-hands: #065f46;
+    --tag-workshop-bg: #fffbeb; --tag-workshop: #92400e;
+    --tag-concept-bg: #eff6ff; --tag-concept: #1e40af;
+    --tag-demo-bg: #fff7ed; --tag-demo: #9a3412;
+    --tag-reflect-bg: #f3f4f6; --tag-reflect: #374151;
+    --tag-new-bg: #fdf2f8; --tag-new: #9d174d;
+    --s1: #4338ca; --s2: #065f46; --s3: #9a3412; --s0: #374151;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  /* ── HEADER ── */
+  .page-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 3rem 2rem;
+  }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .course-label { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
+  .course-title { font-size: 28px; font-weight: 600; color: var(--text-primary); letter-spacing: -.02em; line-height: 1.2; }
+  .course-sub { font-size: 15px; color: var(--text-secondary); margin-top: 6px; }
+  .meta-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.25rem; }
+  .pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg); }
+  /* ── TABS ── */
+  .tab-nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 3rem; display: flex; gap: 0; overflow-x: auto; }
+  .tab-btn { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 18px; border: none; background: transparent; cursor: pointer; color: var(--text-secondary); border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; }
+  .tab-btn:hover { color: var(--text-primary); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  /* ── MAIN ── */
+  .main { max-width: 860px; margin: 0 auto; padding: 2rem 3rem 4rem; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  /* ── SESSION HEADER ── */
+  .session-hero { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 1.75rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-light); }
+  .session-stripe { width: 4px; border-radius: 4px; flex-shrink: 0; align-self: stretch; min-height: 60px; }
+  .s1-color { background: var(--s1); }
+  .s2-color { background: var(--s2); }
+  .s3-color { background: var(--s3); }
+  .s0-color { background: var(--s0); }
+  .session-info { flex: 1; }
+  .session-title { font-size: 20px; font-weight: 600; letter-spacing: -.015em; margin-bottom: 4px; }
+  .session-meta-row { font-size: 12px; color: var(--text-tertiary); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; }
+  .session-goal { font-size: 14px; color: var(--text-secondary); background: var(--accent-bg); border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 14px; line-height: 1.55; }
+  .session-goal strong { color: var(--accent); font-weight: 500; }
+  /* ── ACTIVITIES ── */
+  .activity { display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border-light); }
+  .activity:last-of-type { border-bottom: none; }
+  .time-col { padding-top: 2px; }
+  .time-badge { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text-tertiary); background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 3px 0; text-align: center; width: 48px; }
+  .activity-body {}
+  .activity-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; align-items: center; }
+  .tag { font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 2px 8px; border-radius: 999px; }
+  .tag-orient { background: var(--tag-orient-bg); color: var(--tag-orient); }
+  .tag-hands  { background: var(--tag-hands-bg);  color: var(--tag-hands); }
+  .tag-workshop { background: var(--tag-workshop-bg); color: var(--tag-workshop); }
+  .tag-concept { background: var(--tag-concept-bg); color: var(--tag-concept); }
+  .tag-demo   { background: var(--tag-demo-bg);   color: var(--tag-demo); }
+  .tag-reflect { background: var(--tag-reflect-bg); color: var(--tag-reflect); }
+  .tag-new    { background: var(--tag-new-bg);    color: var(--tag-new); }
+  .activity-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -.01em; }
+  .activity-desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; }
+  .activity-desc code { font-family: 'DM Mono', monospace; font-size: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--text-primary); }
+  .activity-note { font-size: 12px; color: var(--text-tertiary); font-style: italic; margin-top: 6px; padding-left: 10px; border-left: 2px solid var(--border); line-height: 1.5; }
+  /* ── CALLOUT ── */
+  .callout { margin-top: 1.25rem; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .callout strong { color: var(--text-primary); font-weight: 600; }
+  .callout.accent { background: #fffbeb; border-color: #fde68a; }
+  .callout.info { background: var(--accent-bg); border-color: #bfdbfe; }
+  /* ── PRODUCT MAP ── */
+  .product-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0 6px; }
+  .product-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: var(--surface); }
+  .product-card.featured { border-color: var(--accent); box-shadow: 0 0 0 1px #bfdbfe; }
+  .product-card-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 5px; }
+  .product-card-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 5px; }
+  .product-card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px; }
+  .product-divider { border: none; border-top: 1px solid var(--border-light); margin: 8px 0; }
+  .product-sub-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 4px; }
+  .product-sub-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; font-style: italic; }
+  /* ── TIME BAR ── */
+  .time-bar-wrap { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light); }
+  .time-bar-label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
+  .time-bar { display: flex; height: 8px; border-radius: 999px; overflow: hidden; gap: 2px; }
+  .time-bar-seg { border-radius: 999px; }
+  /* ── CHECKLIST ── */
+  .check-section { margin-bottom: 1.5rem; }
+  .check-section-title { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border-light); }
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .tab-nav { display: none; }
+    .panel { display: block !important; page-break-inside: avoid; }
+    .main { max-width: 100%; padding: 1rem; }
+    .page-header { padding: 1.5rem; }
+  }
+  @media (max-width: 640px) {
+    .page-header, .main { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .tab-nav { padding: 0 1.25rem; }
+    .product-map { grid-template-columns: 1fr; }
+    .activity { grid-template-columns: 44px 1fr; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="header-top">
+    <div>
+      <div class="course-label">Internal Training &nbsp;·&nbsp; IT Team</div>
+      <div class="course-title">Claude Code — Getting Started</div>
+      <div class="course-sub">A 3-session course for IT support and Atlassian / monday.com implementers</div>
+    </div>
+  </div>
+  <div class="meta-pills">
+    <span class="pill">3 sessions × 60 min</span>
+    <span class="pill">After office hours</span>
+    <span class="pill">Mixed Windows & macOS</span>
+    <span class="pill">Accounts: most participants have Claude access</span>
+  </div>
+</div>
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="show('s1', this)">Session 1 — Foundation</button>
+  <button class="tab-btn" onclick="show('s2', this)">Session 2 — Workshop</button>
+  <button class="tab-btn" onclick="show('s3', this)">Session 3 — Power & Skills</button>
+  <button class="tab-btn" onclick="show('pre', this)">Pre-session checklist</button>
+</nav>
+<div class="main">
+  <!-- ═══ SESSION 1 ═══ -->
+  <div class="panel active" id="s1">
+    <div class="session-hero">
+      <div class="session-stripe s1-color"></div>
+      <div class="session-info">
+        <div class="session-title">Session 1 — Foundation & First Run</div>
+        <div class="session-meta-row">60 min &nbsp;·&nbsp; After office hours</div>
+        <div class="session-goal"><strong>Exit goal:</strong> every participant has Claude Code installed, understands the product ecosystem, and has run a real prompt inside VS Code — the environment they'll use for the rest of the course.</div>
+      </div>
+    </div>
+    <!-- Activity 1 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">12 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-orient">orientation</span>
+        </div>
+        <div class="activity-name">The Claude product map</div>
+        <div class="activity-desc">Before touching any tool, give participants a clear mental model of the ecosystem. Confusion between products is the single biggest source of learner frustration — resolving it upfront saves time across all three sessions.</div>
+        <div class="product-map" style="margin-top:12px;">
+          <div class="product-card">
+            <div class="product-card-label">Most familiar</div>
+            <div class="product-card-name">Claude.ai</div>
+            <div class="product-card-desc">The chat interface — where most of your team already works. General Q&A, drafting, summarising.</div>
+            <hr class="product-divider">
+            <div class="product-sub-label">Connectors</div>
+            <div class="product-sub-desc">One-click integrations built into Claude.ai — Atlassian, Google Drive, Gmail, Calendar. No setup beyond linking accounts. <em>Connectors live here, not in Claude Code.</em></div>
+          </div>
+          <div class="product-card featured">
+            <div class="product-card-label">This course's focus</div>
+            <div class="product-card-name">Claude Code</div>
+            <div class="product-card-desc">Terminal-based agentic coding assistant. Reads your actual project files and writes, runs, and edits code. Used via terminal or VS Code extension.</div>
+            <hr class="product-divider">
+            <div class="product-sub-label">MCP (Model Context Protocol)</div>
+            <div class="product-sub-desc">Claude Code's way of connecting to external tools — Jira, GitHub, databases — with full programmatic control. Introduced in Session 3.</div>
+          </div>
+          <div class="product-card">
+            <div class="product-card-label">For non-developers</div>
+            <div class="product-card-name">Cowork ✦ new</div>
+            <div class="product-card-desc">Desktop app for non-developers. Automates file and task management without requiring a terminal. The bridge between Claude.ai and Claude Code.</div>
+            <hr class="product-divider">
+            <div class="product-sub-desc"><em>Good to surface for participants who find the terminal intimidating — Cowork is their immediate alternative.</em></div>
+          </div>
+        </div>
+        <div class="activity-note">Teaching tip: draw a left-to-right spectrum — Claude.ai (easiest, least control) → Cowork (no-code desktop) → Claude Code (most powerful, terminal-based). Ask where participants currently sit and where they want to get to. One-liner for class: "Connectors are to Claude.ai what MCP is to Claude Code — same idea, different power level."</div>
+      </div>
+    </div>
+    <!-- Activity 2 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">10 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-hands">hands-on</span>
+        </div>
+        <div class="activity-name">Install Claude Code via terminal</div>
+        <div class="activity-desc">Native installer — no Node.js required. Run in parallel for both OS groups. macOS: one <code>curl</code> command in Terminal. Windows: one command in PowerShell. Authenticate with existing Anthropic accounts. Verify with <code>claude --version</code>.</div>
+        <div class="activity-note">⚠ Windows: Git for Windows must be installed beforehand (see pre-session checklist). Keep VS Code's integrated terminal as the backup if PowerShell causes issues.</div>
+      </div>
+    </div>
+    <!-- Activity 3 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">8 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-concept">concept</span>
+        </div>
+        <div class="activity-name">Brief CLI orientation — just enough</div>
+        <div class="activity-desc">Spend a few minutes in the terminal so participants understand what Claude Code is doing under the hood. Cover only the essentials: <code>cd</code> to navigate, <code>claude</code> to launch, <code>/help</code> to list slash commands, and <code>/quit</code> to exit. Run one live prompt against a real file. The goal is demystification, not proficiency — they'll work in VS Code from here.</div>
+        <div class="activity-note">Anchor this moment: "The terminal is where Claude Code lives. VS Code is just a friendlier window into the same thing."</div>
+      </div>
+    </div>
+    <!-- Activity 4 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">10 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-hands">hands-on</span>
+          <span class="tag tag-new">new</span>
+        </div>
+        <div class="activity-name">Shift to VS Code — install the Claude Code extension</div>
+        <div class="activity-desc">Open VS Code, go to the Extensions panel, search for "Claude Code," and install the official Anthropic extension. Once installed, the Claude Code panel appears in the sidebar. Walk participants through the layout: chat panel, file context indicator, and inline diff view. Authenticate if prompted (re-uses the same account).</div>
+        <div class="activity-note">Why VS Code from here: file explorer + syntax-highlighted output + integrated terminal + inline diff review in one window. Closer to how developers actually work, and significantly less intimidating for non-developers than a bare terminal.</div>
+      </div>
+    </div>
+    <!-- Activity 5 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">15 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-hands">hands-on</span>
+        </div>
+        <div class="activity-name">First real prompt — inside VS Code</div>
+        <div class="activity-desc">Open a folder containing a real work file (a Jira export CSV, a Confluence draft, a config file). Use the Claude Code sidebar panel to ask it to summarise or explain the file's structure. Observe the inline diff review when Claude suggests changes. The goal is to feel the "it actually understands my file" moment — not a toy example.</div>
+      </div>
+    </div>
+    <!-- Activity 6 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-reflect">wrap-up</span>
+        </div>
+        <div class="activity-name">Homework & preview</div>
+        <div class="activity-desc">Homework: open a work folder in VS Code and run one Claude Code prompt on a file you actually use. Preview Session 2: we will build a script that automates a real IT support or Atlassian task — bring your Jira CSV.</div>
+      </div>
+    </div>
+    <div class="time-bar-wrap">
+      <div class="time-bar-label">Time distribution</div>
+      <div class="time-bar">
+        <div class="time-bar-seg" style="flex:12;background:#e0e7ff;"></div>
+        <div class="time-bar-seg" style="flex:10;background:#d1fae5;"></div>
+        <div class="time-bar-seg" style="flex:8;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:10;background:#d1fae5;"></div>
+        <div class="time-bar-seg" style="flex:15;background:#d1fae5;"></div>
+        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:6px;flex-wrap:wrap;">
+        <span style="font-size:11px;color:#6b6963;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#e0e7ff;display:inline-block;"></span>Orientation</span>
+        <span style="font-size:11px;color:#6b6963;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#d1fae5;display:inline-block;"></span>Hands-on</span>
+        <span style="font-size:11px;color:#6b6963;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#dbeafe;display:inline-block;"></span>Concept</span>
+        <span style="font-size:11px;color:#6b6963;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#f3f4f6;display:inline-block;"></span>Wrap-up</span>
+      </div>
+    </div>
+  </div>
+  <!-- ═══ SESSION 2 ═══ -->
+  <div class="panel" id="s2">
+    <div class="session-hero">
+      <div class="session-stripe s2-color"></div>
+      <div class="session-info">
+        <div class="session-title">Session 2 — Claude Code as a Coding Assistant</div>
+        <div class="session-meta-row">60 min &nbsp;·&nbsp; After office hours</div>
+        <div class="session-goal"><strong>Exit goal:</strong> participants build a working script that solves a real IT or Atlassian task inside VS Code, and understand how to iterate when Claude's output isn't right the first time.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-reflect">recap</span></div>
+        <div class="activity-name">Homework debrief</div>
+        <div class="activity-desc">Quick share — what did you prompt Claude Code with? What surprised you? Surface any installation or VS Code extension issues not resolved in Session 1.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">8 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">How Claude Code reads your project</div>
+        <div class="activity-desc">Explain context: Claude Code sees all files in the open VS Code folder. Introduce <code>CLAUDE.md</code> — a plain text file you write once to tell Claude about your project, its conventions, and your team's preferences. Demo: create a CLAUDE.md that describes a typical Atlassian project structure. Show how it reduces repetitive explanation in prompts. This is the "configure once, benefit always" moment.</div>
+        <div class="activity-note">In VS Code, CLAUDE.md appears as a regular file in the explorer — participants can see and edit it without leaving their workspace.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">/plan mode — think before you build</div>
+        <div class="activity-desc">Before asking Claude Code to write or change any files, use <code>/plan</code> to ask it to outline its approach first. Claude describes what it intends to do — which files to create or modify, what logic to apply — without making any changes. You review the plan, redirect if needed, then proceed. For non-developers this is especially valuable: it builds trust, catches misunderstandings early, and makes the iteration loop feel transparent rather than like a black box. One-liner for class: "Plan first, build second."</div>
+        <div class="activity-note"><code>/plan</code> is also a token-efficiency tool — catching a wrong direction before Claude writes 100 lines of code saves far more tokens than <code>/compact</code> ever could. Carry this habit into the workshop that follows.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">30 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-workshop">workshop</span></div>
+        <div class="activity-name">Build: IT support ticket report generator</div>
+        <div class="activity-desc">Give Claude Code a CSV export of Jira or monday.com tickets (use the sample file distributed before the session) and ask it to write a Python script that categorises tickets by type, counts by assignee, and outputs a clean HTML report. Instructor demos the full iteration loop in VS Code first — <code>/plan</code> to outline the approach, prompt, review inline diff, accept or reject changes, re-run. Then participants build their own version.<br><br>Key learning inside the workshop: how to use <code>/plan</code> to steer Claude before any code is written, how to review Claude's proposed file changes in VS Code's diff view, and how to rephrase a prompt when output doesn't match intent.</div>
+        <div class="activity-note">Why this project: immediately useful, requires no prior coding knowledge to direct, produces a visible HTML output shareable the next morning, and naturally exercises the accept/reject diff review flow that VS Code makes accessible.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">7 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-demo">demo</span></div>
+        <div class="activity-name">Live demo — Claude Code meets the Jira / monday.com API</div>
+        <div class="activity-desc">Instructor-only live demo. Using a pre-authenticated API token, show Claude Code fetching real data directly from Jira or monday.com — no CSV, no copy-paste. Ask it to pull open tickets assigned to a specific user, or summarise board items by status. The point is the contrast: "Earlier you fed Claude a file. Here, Claude goes and gets the data itself."<br><br>Frame this explicitly as the bridge to Session 3: MCP automates and deepens exactly this pattern. Keep credentials and config out of participant hands for now — this is a demo, not a hands-on exercise.</div>
+        <div class="activity-note">Instructor prep: prepare a read-only API token before the session. Jira: Settings → Personal Access Tokens. monday.com: Profile → Developers → My Access Tokens. Test the connection beforehand — a live demo that fails on auth kills momentum.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">Token efficiency — first principles</div>
+        <div class="activity-desc">Introduce the context window with a simple analogy: Claude Code's short-term working memory. Show what happens when a session grows too long. Teach two habits: <code>/compact</code> (summarise and continue) and <code>/clear</code> (start fresh for a new task). Connect to cost — fewer tokens used = lower API spend per session. Note that VS Code's Claude Code panel shows session length visually, which helps.</div>
+      </div>
+    </div>
+    <div class="callout accent">
+      <strong>Instructor prep before Session 2:</strong> Prepare a sample Jira or monday.com CSV export (10–20 rows, real column names, fully anonymised) and share via a team folder. Participants use this file in the workshop so no one is blocked by data access or sensitivity concerns during the session. Also prepare a read-only API token for the live demo at the end of the session.
+    </div>
+    <div class="time-bar-wrap">
+      <div class="time-bar-label">Time distribution</div>
+      <div class="time-bar">
+        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
+        <div class="time-bar-seg" style="flex:8;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:5;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:30;background:#fffbeb;"></div>
+        <div class="time-bar-seg" style="flex:7;background:#fff7ed;"></div>
+        <div class="time-bar-seg" style="flex:5;background:#dbeafe;"></div>
+      </div>
+    </div>
+  </div>
+  <!-- ═══ SESSION 3 ═══ -->
+  <div class="panel" id="s3">
+    <div class="session-hero">
+      <div class="session-stripe s3-color"></div>
+      <div class="session-info">
+        <div class="session-title">Session 3 — Power Use, Skills & Independent Learning</div>
+        <div class="session-meta-row">60 min &nbsp;·&nbsp; After office hours</div>
+        <div class="session-goal"><strong>Exit goal:</strong> participants know role-specific use cases for their Atlassian and monday.com work, can create team skills, have seen MCP in action, and leave with a personal self-study roadmap.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-reflect">recap</span></div>
+        <div class="activity-name">Workshop wins</div>
+        <div class="activity-desc">Quick share of what the ticket report script produced. Surface any blockers from between sessions. Celebrate what worked — this anchors confidence before introducing more advanced material.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">15 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-demo">demo</span></div>
+        <div class="activity-name">Role-specific use cases</div>
+        <div class="activity-desc">Tailored live demos for their actual tools, run directly from VS Code:<br><br>
+          <strong>Atlassian:</strong> generate JQL queries from plain English descriptions, draft Confluence page structures from bullet-point notes, write Jira automation rule conditions in plain text.<br><br>
+          <strong>monday.com:</strong> formula column logic, API webhook scripts, board configuration documentation.<br><br>
+          Frame these as "second brain" patterns — Claude Code as the colleague who never forgets syntax or API structure.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">15 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">Claude's Skills (SKILL.md)</div>
+        <div class="activity-desc">Introduce SKILL.md files — reusable instruction sets stored in your project that teach Claude Code how to handle your team's specific workflows. Live demo inside VS Code: create a skill file for "generate a Jira epic from a project brief." Participants then draft a skill for one task they do repeatedly. This is the bridge between a personal tool and a shareable team asset — check the file into your repo and the whole team benefits.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">10 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span><span class="tag tag-new">new</span></div>
+        <div class="activity-name">MCP — connecting Claude Code to your tools</div>
+        <div class="activity-desc">Brief, demo-first introduction. Show Claude Code asking Jira for a real ticket by ID using the Atlassian MCP server — no copying, no pasting, Claude Code acts directly inside Jira. Explain the mental model: MCP is what lets Claude Code take actions inside your tools, not just generate text for you to paste.<br><br>Keep configuration detail out of scope for this session — frame it as "this is what's possible, here's where to go next." Point to <code>docs.claude.com/en/docs/claude-code</code> for the MCP setup guide.</div>
+        <div class="activity-note">Contrast clearly with Session 1's product map: Connectors (Claude.ai) = one-click, no config. MCP (Claude Code) = manual setup, full programmatic control. Same concept, different power level.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">8 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">Token efficiency — advanced habits</div>
+        <div class="activity-desc">Introduce <code>.claudeignore</code> to exclude large or irrelevant folders (attachments, exports, archives) from Claude Code's context. Show how a well-scoped VS Code workspace costs fewer tokens and produces more focused output. Revisit CLAUDE.md as a token-efficiency tool — explicit instructions prevent Claude from spending tokens guessing your intent.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">7 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-orient">orientation</span></div>
+        <div class="activity-name">How to keep learning independently</div>
+        <div class="activity-desc">Point to <code>docs.claude.com</code> for Claude Code and MCP documentation. Recommend the flywheel pattern: find a repetitive task → ask Claude Code to automate it → iterate until right → turn it into a SKILL.md → share with the team. Close with the framing: Claude Code is a learning accelerator — every script it writes is also an explanation you can study.</div>
+      </div>
+    </div>
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-reflect">wrap-up</span></div>
+        <div class="activity-name">Personal commitment</div>
+        <div class="activity-desc">Each participant states one task they will automate using Claude Code in the next two weeks — written down. Creates accountability without pressure and gives you a natural follow-up conversation starter.</div>
+      </div>
+    </div>
+    <div class="time-bar-wrap">
+      <div class="time-bar-label">Time distribution</div>
+      <div class="time-bar">
+        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
+        <div class="time-bar-seg" style="flex:15;background:#fff7ed;"></div>
+        <div class="time-bar-seg" style="flex:15;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:10;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:8;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:7;background:#e0e7ff;"></div>
+        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
+      </div>
+    </div>
+  </div>
+  <!-- ═══ PRE-SESSION CHECKLIST ═══ -->
+  <div class="panel" id="pre">
+    <div class="session-hero">
+      <div class="session-stripe s0-color"></div>
+      <div class="session-info">
+        <div class="session-title">Pre-session checklist</div>
+        <div class="session-meta-row">Send to participants at least 48 hours before Session 1</div>
+        <div class="session-goal"><strong>Goal:</strong> arrive at Session 1 with zero blockers so the full 60 minutes can be used for learning, not troubleshooting accounts or missing software.</div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">All participants</div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
+        <div class="activity-body">
+          <div class="activity-name">Confirm Anthropic account access</div>
+          <div class="activity-desc">Log in to <code>claude.ai</code> and verify your account works. If you use a Claude Pro or team plan, confirm billing is active — Claude Code draws from the same account.</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
+        <div class="activity-body">
+          <div class="activity-name">Install or verify VS Code</div>
+          <div class="activity-desc">Download VS Code from <code>code.visualstudio.com</code> if not already installed. Open it and confirm it launches. We will install the Claude Code extension together in Session 1, but VS Code itself must be ready.</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
+        <div class="activity-body">
+          <div class="activity-name">Find a sample work file</div>
+          <div class="activity-desc">Locate one real file you work with regularly — a Jira export CSV, a monday.com board export, a Confluence page draft, or any config file. We will use it in Session 1's first prompt exercise. Anonymise any sensitive data before the session.</div>
+        </div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">Windows participants only</div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">Win</div></div>
+        <div class="activity-body">
+          <div class="activity-name">Install Git for Windows</div>
+          <div class="activity-desc">Download from <code>git-scm.com</code> and install with default settings. This provides Git Bash, which Claude Code uses on native Windows installs. Takes under 5 minutes. If in doubt, install it — no harm in having it.</div>
+        </div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">macOS participants only</div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">Mac</div></div>
+        <div class="activity-body">
+          <div class="activity-name">Locate Terminal</div>
+          <div class="activity-desc">Spotlight (Cmd+Space) → type "Terminal" → open it. You don't need to run anything — just confirm you can find and open it. This avoids the "where is Terminal?" moment during live installation.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout info">
+      <strong>Instructor action before Session 2:</strong> Prepare a sample Jira or monday.com CSV export (10–20 rows, real column names, fully anonymised) and share via a team folder. Participants will use this file during the workshop so no one is blocked by data access or confidentiality concerns on the night.
+    </div>
+  </div>
+</div><!-- /main -->
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

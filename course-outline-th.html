@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — IT Team Course Outline (ภาษาไทย)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --border: #e4e2db;
+    --border-light: #eeece6;
+    --text-primary: #1a1917;
+    --text-secondary: #6b6963;
+    --text-tertiary: #a09d97;
+    --accent: #2563eb;
+    --accent-bg: #eff6ff;
+    --tag-orient-bg: #f0effe; --tag-orient: #4338ca;
+    --tag-hands-bg: #ecfdf5; --tag-hands: #065f46;
+    --tag-workshop-bg: #fffbeb; --tag-workshop: #92400e;
+    --tag-concept-bg: #eff6ff; --tag-concept: #1e40af;
+    --tag-demo-bg: #fff7ed; --tag-demo: #9a3412;
+    --tag-reflect-bg: #f3f4f6; --tag-reflect: #374151;
+    --tag-new-bg: #fdf2f8; --tag-new: #9d174d;
+    --s1: #4338ca; --s2: #065f46; --s3: #9a3412; --s0: #374151;
+  }
+  body {
+    font-family: 'Sarabun', 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  /* ── HEADER ── */
+  .page-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 3rem 2rem;
+  }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .course-label { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
+  .course-title { font-size: 28px; font-weight: 600; color: var(--text-primary); letter-spacing: -.02em; line-height: 1.2; }
+  .course-sub { font-size: 15px; color: var(--text-secondary); margin-top: 6px; }
+  .meta-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.25rem; }
+  .pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg); }
+  /* ── TABS ── */
+  .tab-nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 3rem; display: flex; gap: 0; overflow-x: auto; }
+  .tab-btn { font-family: 'Sarabun', 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 18px; border: none; background: transparent; cursor: pointer; color: var(--text-secondary); border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; }
+  .tab-btn:hover { color: var(--text-primary); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  /* ── MAIN ── */
+  .main { max-width: 860px; margin: 0 auto; padding: 2rem 3rem 4rem; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  /* ── SESSION HEADER ── */
+  .session-hero { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 1.75rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-light); }
+  .session-stripe { width: 4px; border-radius: 4px; flex-shrink: 0; align-self: stretch; min-height: 60px; }
+  .s1-color { background: var(--s1); }
+  .s2-color { background: var(--s2); }
+  .s3-color { background: var(--s3); }
+  .s0-color { background: var(--s0); }
+  .session-info { flex: 1; }
+  .session-title { font-size: 20px; font-weight: 600; letter-spacing: -.015em; margin-bottom: 4px; }
+  .session-meta-row { font-size: 12px; color: var(--text-tertiary); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; }
+  .session-goal { font-size: 14px; color: var(--text-secondary); background: var(--accent-bg); border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 14px; line-height: 1.65; }
+  .session-goal strong { color: var(--accent); font-weight: 500; }
+  /* ── ACTIVITIES ── */
+  .activity { display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border-light); }
+  .activity:last-of-type { border-bottom: none; }
+  .time-col { padding-top: 2px; }
+  .time-badge { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text-tertiary); background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 3px 0; text-align: center; width: 48px; }
+  .activity-body {}
+  .activity-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; align-items: center; }
+  .tag { font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 2px 8px; border-radius: 999px; }
+  .tag-orient { background: var(--tag-orient-bg); color: var(--tag-orient); }
+  .tag-hands  { background: var(--tag-hands-bg);  color: var(--tag-hands); }
+  .tag-workshop { background: var(--tag-workshop-bg); color: var(--tag-workshop); }
+  .tag-concept { background: var(--tag-concept-bg); color: var(--tag-concept); }
+  .tag-demo   { background: var(--tag-demo-bg);   color: var(--tag-demo); }
+  .tag-reflect { background: var(--tag-reflect-bg); color: var(--tag-reflect); }
+  .tag-new    { background: var(--tag-new-bg);    color: var(--tag-new); }
+  .activity-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -.01em; }
+  .activity-desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; }
+  .activity-desc code { font-family: 'DM Mono', monospace; font-size: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--text-primary); }
+  .activity-note { font-size: 12px; color: var(--text-tertiary); font-style: italic; margin-top: 6px; padding-left: 10px; border-left: 2px solid var(--border); line-height: 1.6; }
+  /* ── CALLOUT ── */
+  .callout { margin-top: 1.25rem; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+  .callout strong { color: var(--text-primary); font-weight: 600; }
+  .callout.accent { background: #fffbeb; border-color: #fde68a; }
+  .callout.info { background: var(--accent-bg); border-color: #bfdbfe; }
+  /* ── PRODUCT MAP ── */
+  .product-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0 6px; }
+  .product-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: var(--surface); }
+  .product-card.featured { border-color: var(--accent); box-shadow: 0 0 0 1px #bfdbfe; }
+  .product-card-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 5px; }
+  .product-card-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 5px; }
+  .product-card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px; }
+  .product-divider { border: none; border-top: 1px solid var(--border-light); margin: 8px 0; }
+  .product-sub-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 4px; }
+  .product-sub-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; font-style: italic; }
+  /* ── TIME BAR ── */
+  .time-bar-wrap { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-light); }
+  .time-bar-label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
+  .time-bar { display: flex; height: 8px; border-radius: 999px; overflow: hidden; gap: 2px; }
+  .time-bar-seg { border-radius: 999px; }
+  /* ── CHECKLIST ── */
+  .check-section { margin-bottom: 1.5rem; }
+  .check-section-title { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border-light); }
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .tab-nav { display: none; }
+    .panel { display: block !important; page-break-inside: avoid; }
+    .main { max-width: 100%; padding: 1rem; }
+    .page-header { padding: 1.5rem; }
+  }
+  @media (max-width: 640px) {
+    .page-header, .main { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .tab-nav { padding: 0 1.25rem; }
+    .product-map { grid-template-columns: 1fr; }
+    .activity { grid-template-columns: 44px 1fr; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="header-top">
+    <div>
+      <div class="course-label">การฝึกอบรมภายใน &nbsp;·&nbsp; ทีม IT</div>
+      <div class="course-title">Claude Code — Getting Started</div>
+      <div class="course-sub">หลักสูตร 3 เซสชันสำหรับ IT Support และผู้ใช้งาน Atlassian / monday.com</div>
+    </div>
+  </div>
+  <div class="meta-pills">
+    <span class="pill">3 sessions × 60 นาที</span>
+    <span class="pill">หลังเลิกงาน</span>
+    <span class="pill">Windows และ macOS</span>
+    <span class="pill">บัญชี: ผู้เข้าร่วมส่วนใหญ่มีสิทธิ์เข้าถึง Claude แล้ว</span>
+  </div>
+</div>
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="show('s1', this)">Session 1 — Foundation</button>
+  <button class="tab-btn" onclick="show('s2', this)">Session 2 — Workshop</button>
+  <button class="tab-btn" onclick="show('s3', this)">Session 3 — Power & Skills</button>
+  <button class="tab-btn" onclick="show('pre', this)">Pre-session checklist</button>
+</nav>
+<div class="main">
+
+  <!-- ═══ SESSION 1 ═══ -->
+  <div class="panel active" id="s1">
+    <div class="session-hero">
+      <div class="session-stripe s1-color"></div>
+      <div class="session-info">
+        <div class="session-title">Session 1 — Foundation & First Run</div>
+        <div class="session-meta-row">60 นาที &nbsp;·&nbsp; หลังเลิกงาน</div>
+        <div class="session-goal"><strong>Exit goal:</strong> ผู้เข้าร่วมทุกคนติดตั้ง Claude Code ได้สำเร็จ เข้าใจ ecosystem ของผลิตภัณฑ์ และได้ลองรัน prompt จริงใน VS Code — ซึ่งเป็น environment ที่จะใช้ตลอดหลักสูตร</div>
+      </div>
+    </div>
+
+    <!-- Activity 1 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">12 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-orient">orientation</span>
+        </div>
+        <div class="activity-name">The Claude product map</div>
+        <div class="activity-desc">ก่อนที่จะแตะเครื่องมือใดๆ ให้ผู้เข้าร่วมมี mental model ที่ชัดเจนของ ecosystem ก่อน ความสับสนระหว่างผลิตภัณฑ์คือสาเหตุหลักที่ทำให้ผู้เรียนรู้สึกหงุดหน่ายมากที่สุด — การแก้ปัญหานี้ตั้งแต่ต้นช่วยประหยัดเวลาตลอดทั้งสามเซสชัน</div>
+        <div class="product-map" style="margin-top:12px;">
+          <div class="product-card">
+            <div class="product-card-label">คุ้นเคยมากที่สุด</div>
+            <div class="product-card-name">Claude.ai</div>
+            <div class="product-card-desc">อินเทอร์เฟซ chat — ที่ที่ทีมของคุณคุ้นเคยอยู่แล้ว ใช้สำหรับถาม-ตอบทั่วไป ร่างข้อความ และสรุปเนื้อหา</div>
+            <hr class="product-divider">
+            <div class="product-sub-label">Connectors</div>
+            <div class="product-sub-desc">การเชื่อมต่อแบบ one-click ที่ built-in ใน Claude.ai — Atlassian, Google Drive, Gmail, Calendar ไม่ต้องตั้งค่าอะไรนอกจากการ link บัญชี <em>Connectors อยู่ที่นี่ ไม่ใช่ใน Claude Code</em></div>
+          </div>
+          <div class="product-card featured">
+            <div class="product-card-label">จุดมุ่งหมายของหลักสูตรนี้</div>
+            <div class="product-card-name">Claude Code</div>
+            <div class="product-card-desc">AI coding assistant แบบ terminal-based อ่านไฟล์โปรเจกต์จริงของคุณ และเขียน รัน และแก้ไขโค้ด ใช้งานผ่าน terminal หรือ VS Code extension</div>
+            <hr class="product-divider">
+            <div class="product-sub-label">MCP (Model Context Protocol)</div>
+            <div class="product-sub-desc">วิธีที่ Claude Code เชื่อมต่อกับเครื่องมือภายนอก เช่น Jira, GitHub, databases พร้อม programmatic control เต็มรูปแบบ แนะนำใน Session 3</div>
+          </div>
+          <div class="product-card">
+            <div class="product-card-label">สำหรับผู้ที่ไม่ใช่ developer</div>
+            <div class="product-card-name">Cowork ✦ new</div>
+            <div class="product-card-desc">Desktop app สำหรับผู้ที่ไม่ใช่ developer ช่วย automate การจัดการไฟล์และงานโดยไม่ต้องใช้ terminal เป็นสะพานเชื่อมระหว่าง Claude.ai และ Claude Code</div>
+            <hr class="product-divider">
+            <div class="product-sub-desc"><em>เหมาะสำหรับผู้เข้าร่วมที่รู้สึกกังวลกับ terminal — Cowork คือทางเลือกที่เข้าถึงได้ทันที</em></div>
+          </div>
+        </div>
+        <div class="activity-note">เคล็ดลับการสอน: วาด spectrum จากซ้ายไปขวา — Claude.ai (ใช้งานง่ายที่สุด ควบคุมน้อยที่สุด) → Cowork (no-code desktop) → Claude Code (ทรงพลังที่สุด ใช้ terminal) ถามว่าตอนนี้ผู้เข้าร่วมอยู่ตรงไหนและอยากไปถึงจุดไหน ประโยคสำหรับชั้นเรียน: "Connectors คือสิ่งที่ Connectors เป็นให้ Claude.ai เหมือนกับที่ MCP เป็นให้ Claude Code — concept เดียวกัน แต่ power level ต่างกัน"</div>
+      </div>
+    </div>
+
+    <!-- Activity 2 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">10 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-hands">hands-on</span>
+        </div>
+        <div class="activity-name">Install Claude Code via terminal</div>
+        <div class="activity-desc">Native installer — ไม่ต้องติดตั้ง Node.js รัน install พร้อมกันสำหรับทั้งสอง OS macOS: คำสั่ง <code>curl</code> เดียวใน Terminal Windows: คำสั่งเดียวใน PowerShell ยืนยันตัวตนด้วยบัญชี Anthropic ที่มีอยู่แล้ว ตรวจสอบด้วย <code>claude --version</code></div>
+        <div class="activity-note">⚠ Windows: ต้องติดตั้ง Git for Windows ก่อน (ดู pre-session checklist) ใช้ integrated terminal ของ VS Code เป็น backup หาก PowerShell มีปัญหา</div>
+      </div>
+    </div>
+
+    <!-- Activity 3 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">8 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-concept">concept</span>
+        </div>
+        <div class="activity-name">Brief CLI orientation — just enough</div>
+        <div class="activity-desc">ใช้เวลาสั้นๆ ใน terminal เพื่อให้ผู้เข้าร่วมเข้าใจว่า Claude Code ทำงานอย่างไรเบื้องหลัง ครอบคลุมเฉพาะสิ่งที่จำเป็น: <code>cd</code> เพื่อ navigate, <code>claude</code> เพื่อเปิด, <code>/help</code> เพื่อดูรายการ slash commands และ <code>/quit</code> เพื่อออก รัน prompt สดกับไฟล์จริง เป้าหมายคือทำให้ไม่รู้สึกกลัว ไม่ใช่ให้ชำนาญ — พวกเขาจะทำงานใน VS Code ต่อจากนี้</div>
+        <div class="activity-note">จุดยึดสำคัญ: "Terminal คือที่อยู่ของ Claude Code VS Code เป็นแค่หน้าต่างที่ใช้งานได้ง่ายกว่าสำหรับสิ่งเดียวกัน"</div>
+      </div>
+    </div>
+
+    <!-- Activity 4 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">10 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-hands">hands-on</span>
+          <span class="tag tag-new">new</span>
+        </div>
+        <div class="activity-name">Shift to VS Code — install the Claude Code extension</div>
+        <div class="activity-desc">เปิด VS Code ไปที่ Extensions panel ค้นหา "Claude Code" และติดตั้ง extension อย่างเป็นทางการของ Anthropic เมื่อติดตั้งแล้ว panel ของ Claude Code จะปรากฏใน sidebar พาผู้เข้าร่วมดูโครงสร้าง: chat panel, file context indicator และ inline diff view ยืนยันตัวตนถ้าถูกถาม (ใช้บัญชีเดิม)</div>
+        <div class="activity-note">ทำไมต้องใช้ VS Code จากนี้: file explorer + syntax-highlighted output + integrated terminal + inline diff review อยู่ในหน้าต่างเดียว ใกล้เคียงกับวิธีที่ developer ทำงานจริง และน่ากลัวน้อยกว่า terminal เปล่าๆ สำหรับผู้ที่ไม่ใช่ developer มาก</div>
+      </div>
+    </div>
+
+    <!-- Activity 5 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">15 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-hands">hands-on</span>
+        </div>
+        <div class="activity-name">First real prompt — inside VS Code</div>
+        <div class="activity-desc">เปิดโฟลเดอร์ที่มีไฟล์งานจริง (CSV export จาก Jira, draft จาก Confluence หรือ config file) ใช้ sidebar panel ของ Claude Code เพื่อถามให้สรุปหรืออธิบายโครงสร้างของไฟล์ สังเกต inline diff review เมื่อ Claude แนะนำการเปลี่ยนแปลง เป้าหมายคือสัมผัสกับช่วงเวลา "มันเข้าใจไฟล์ของฉันจริงๆ" — ไม่ใช่ตัวอย่างที่แกล้งทำ</div>
+      </div>
+    </div>
+
+    <!-- Activity 6 -->
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags">
+          <span class="tag tag-reflect">wrap-up</span>
+        </div>
+        <div class="activity-name">Homework & preview</div>
+        <div class="activity-desc">การบ้าน: เปิดโฟลเดอร์งานใน VS Code และรัน prompt ของ Claude Code กับไฟล์ที่คุณใช้จริง Preview Session 2: เราจะสร้าง script ที่ automate งาน IT support หรือ Atlassian จริงๆ — เอา Jira CSV มาด้วย</div>
+      </div>
+    </div>
+
+    <div class="time-bar-wrap">
+      <div class="time-bar-label">Time distribution</div>
+      <div class="time-bar">
+        <div class="time-bar-seg" style="flex:12;background:#e0e7ff;"></div>
+        <div class="time-bar-seg" style="flex:10;background:#d1fae5;"></div>
+        <div class="time-bar-seg" style="flex:8;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:10;background:#d1fae5;"></div>
+        <div class="time-bar-seg" style="flex:15;background:#d1fae5;"></div>
+        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:6px;flex-wrap:wrap;">
+        <span style="font-size:11px;color:#6b6963;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#e0e7ff;display:inline-block;"></span>Orientation</span>
+        <span style="font-size:11px;color:#6b6963;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#d1fae5;display:inline-block;"></span>Hands-on</span>
+        <span style="font-size:11px;color:#6b6963;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#dbeafe;display:inline-block;"></span>Concept</span>
+        <span style="font-size:11px;color:#6b6963;display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:2px;background:#f3f4f6;display:inline-block;"></span>Wrap-up</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SESSION 2 ═══ -->
+  <div class="panel" id="s2">
+    <div class="session-hero">
+      <div class="session-stripe s2-color"></div>
+      <div class="session-info">
+        <div class="session-title">Session 2 — Claude Code as a Coding Assistant</div>
+        <div class="session-meta-row">60 นาที &nbsp;·&nbsp; หลังเลิกงาน</div>
+        <div class="session-goal"><strong>Exit goal:</strong> ผู้เข้าร่วมสร้าง script ที่ทำงานได้จริงเพื่อแก้ปัญหา IT หรือ Atlassian จริงๆ ใน VS Code และเข้าใจวิธี iterate เมื่อผลลัพธ์จาก Claude ไม่ตรงกับที่ต้องการในครั้งแรก</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-reflect">recap</span></div>
+        <div class="activity-name">Homework debrief</div>
+        <div class="activity-desc">แชร์กันสั้นๆ — คุณ prompt Claude Code ว่าอะไร? อะไรที่ทำให้คุณแปลกใจ? แก้ปัญหาการติดตั้งหรือปัญหา VS Code extension ที่ยังค้างอยู่จาก Session 1</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">8 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">How Claude Code reads your project</div>
+        <div class="activity-desc">อธิบาย context: Claude Code เห็นไฟล์ทั้งหมดในโฟลเดอร์ที่เปิดใน VS Code แนะนำ <code>CLAUDE.md</code> — ไฟล์ plain text ที่คุณเขียนครั้งเดียวเพื่อบอก Claude เกี่ยวกับโปรเจกต์ conventions และ preferences ของทีม Demo: สร้าง CLAUDE.md ที่อธิบายโครงสร้าง Atlassian project ทั่วไป แสดงให้เห็นว่ามันช่วยลดการอธิบายซ้ำๆ ใน prompt ได้อย่างไร นี่คือช่วงเวลา "ตั้งค่าครั้งเดียว ได้ประโยชน์ตลอด"</div>
+        <div class="activity-note">ใน VS Code, CLAUDE.md จะปรากฏเป็นไฟล์ปกติใน explorer — ผู้เข้าร่วมสามารถดูและแก้ไขได้โดยไม่ต้องออกจาก workspace</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">/plan mode — think before you build</div>
+        <div class="activity-desc">ก่อนที่จะขอให้ Claude Code เขียนหรือแก้ไขไฟล์ใดๆ ให้ใช้ <code>/plan</code> เพื่อขอให้อธิบาย approach ก่อน Claude จะบอกว่าตั้งใจจะทำอะไร — ไฟล์ไหนที่จะสร้างหรือแก้ไข logic อะไรที่จะใช้ — โดยไม่เปลี่ยนแปลงอะไรเลย คุณ review แผน แก้ไขทิศทางถ้าจำเป็น แล้วค่อยดำเนินการต่อ สำหรับผู้ที่ไม่ใช่ developer สิ่งนี้มีคุณค่าเป็นพิเศษ: สร้างความเชื่อมั่น จับความเข้าใจผิดได้ตั้งแต่ต้น และทำให้ iteration loop รู้สึกโปร่งใสแทนที่จะรู้สึกเหมือน black box ประโยคสำหรับชั้นเรียน: "Plan ก่อน แล้วค่อย build"</div>
+        <div class="activity-note"><code>/plan</code> ยังเป็น token-efficiency tool อีกด้วย — การจับทิศทางผิดก่อนที่ Claude จะเขียนโค้ด 100 บรรทัด ประหยัด token ได้มากกว่า <code>/compact</code> มาก นำนิสัยนี้ติดตัวเข้าสู่ workshop ที่ตามมา</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">30 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-workshop">workshop</span></div>
+        <div class="activity-name">Build: IT support ticket report generator</div>
+        <div class="activity-desc">ให้ Claude Code ดู CSV export ของ Jira หรือ monday.com tickets (ใช้ sample file ที่แจกก่อนเซสชัน) และขอให้เขียน Python script ที่จัดหมวดหมู่ tickets ตามประเภท นับตาม assignee และ output เป็น HTML report ที่สะอาด ผู้สอนสาธิต iteration loop ใน VS Code ก่อน — <code>/plan</code> เพื่อวาง approach, prompt, review inline diff, accept หรือ reject การเปลี่ยนแปลง, re-run จากนั้นผู้เข้าร่วมสร้างเวอร์ชันของตัวเอง<br><br>การเรียนรู้สำคัญภายใน workshop: วิธีใช้ <code>/plan</code> เพื่อกำหนดทิศทาง Claude ก่อนที่จะเขียนโค้ดแม้แต่บรรทัดเดียว วิธี review การเปลี่ยนแปลงไฟล์ที่ Claude เสนอใน diff view ของ VS Code และวิธีปรับ prompt เมื่อผลลัพธ์ไม่ตรงกับที่ต้องการ</div>
+        <div class="activity-note">ทำไมต้องเลือก project นี้: ใช้งานได้ทันที ไม่ต้องมีความรู้ coding มาก่อน ผลิต HTML output ที่มองเห็นได้และแชร์ได้เช้าวันต่อมา และฝึก accept/reject diff review flow ที่ VS Code ทำให้ง่ายโดยธรรมชาติ</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">7 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-demo">demo</span></div>
+        <div class="activity-name">Live demo — Claude Code meets the Jira / monday.com API</div>
+        <div class="activity-desc">Demo โดยผู้สอนเท่านั้น โดยใช้ API token ที่เตรียมไว้ล่วงหน้า แสดง Claude Code ที่ดึงข้อมูลจริงจาก Jira หรือ monday.com โดยตรง — ไม่มี CSV ไม่มี copy-paste ขอให้ดึง open tickets ที่ assign ให้ผู้ใช้คนใดคนหนึ่ง หรือสรุป board items ตาม status จุดสำคัญคือความแตกต่าง: "ก่อนหน้านี้คุณส่งไฟล์ให้ Claude ตรงนี้ Claude ไปดึงข้อมูลเองเลย"<br><br>Frame ให้ชัดเจนว่านี่คือสะพานสู่ Session 3: MCP จะ automate และขยาย pattern นี้ เก็บ credentials และ config ไว้กับผู้สอน — นี่คือ demo ไม่ใช่ hands-on exercise</div>
+        <div class="activity-note">การเตรียมตัวของผู้สอน: เตรียม read-only API token ก่อนเซสชัน Jira: Settings → Personal Access Tokens / monday.com: Profile → Developers → My Access Tokens ทดสอบ connection ก่อน — demo ที่ fail เรื่อง auth ทำลาย momentum ได้มาก</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">Token efficiency — first principles</div>
+        <div class="activity-desc">แนะนำ context window ด้วย analogy ง่ายๆ: หน่วยความจำระยะสั้นในการทำงานของ Claude Code แสดงให้เห็นว่าเกิดอะไรขึ้นเมื่อเซสชันยาวเกินไป สอน 2 นิสัย: <code>/compact</code> (สรุปและทำต่อ) และ <code>/clear</code> (เริ่มใหม่สำหรับงานใหม่) เชื่อมโยงกับค่าใช้จ่าย — ใช้ token น้อยลง = ค่า API ต่อเซสชันถูกลง สังเกตว่า panel ของ Claude Code ใน VS Code แสดงความยาวเซสชันแบบ visual ซึ่งช่วยได้</div>
+      </div>
+    </div>
+
+    <div class="callout accent">
+      <strong>การเตรียมตัวของผู้สอนก่อน Session 2:</strong> เตรียม sample CSV export จาก Jira หรือ monday.com (10–20 แถว ชื่อคอลัมน์จริง ลบข้อมูลส่วนตัวทั้งหมด) และแชร์ผ่านโฟลเดอร์ของทีม ผู้เข้าร่วมใช้ไฟล์นี้ใน workshop เพื่อไม่ให้ถูก block เรื่อง data access หรือความกังวลด้านความลับระหว่างเซสชัน นอกจากนี้ให้เตรียม read-only API token สำหรับ live demo ช่วงท้ายเซสชันด้วย
+    </div>
+
+    <div class="time-bar-wrap">
+      <div class="time-bar-label">Time distribution</div>
+      <div class="time-bar">
+        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
+        <div class="time-bar-seg" style="flex:8;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:5;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:30;background:#fffbeb;"></div>
+        <div class="time-bar-seg" style="flex:7;background:#fff7ed;"></div>
+        <div class="time-bar-seg" style="flex:5;background:#dbeafe;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SESSION 3 ═══ -->
+  <div class="panel" id="s3">
+    <div class="session-hero">
+      <div class="session-stripe s3-color"></div>
+      <div class="session-info">
+        <div class="session-title">Session 3 — Power Use, Skills & Independent Learning</div>
+        <div class="session-meta-row">60 นาที &nbsp;·&nbsp; หลังเลิกงาน</div>
+        <div class="session-goal"><strong>Exit goal:</strong> ผู้เข้าร่วมรู้จัก use case เฉพาะบทบาทสำหรับงาน Atlassian และ monday.com ของตนเอง สามารถสร้าง team skills ได้ ได้เห็น MCP ในการใช้งานจริง และออกไปพร้อม personal self-study roadmap</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-reflect">recap</span></div>
+        <div class="activity-name">Workshop wins</div>
+        <div class="activity-desc">แชร์กันสั้นๆ ว่า ticket report script ให้ผลลัพธ์อะไร แก้ปัญหาที่ค้างอยู่ระหว่างเซสชัน ฉลองสิ่งที่ได้ผล — นี่ช่วย anchor ความมั่นใจก่อนเข้าสู่เนื้อหาขั้นสูงกว่า</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">15 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-demo">demo</span></div>
+        <div class="activity-name">Role-specific use cases</div>
+        <div class="activity-desc">Demo สดที่ tailored สำหรับเครื่องมือจริงของพวกเขา รันโดยตรงจาก VS Code:<br><br>
+          <strong>Atlassian:</strong> สร้าง JQL query จากคำอธิบายภาษาธรรมดา, ร่างโครงสร้างหน้า Confluence จาก bullet-point notes, เขียน Jira automation rule conditions เป็น plain text<br><br>
+          <strong>monday.com:</strong> logic สำหรับ formula column, API webhook scripts, เอกสาร board configuration<br><br>
+          Frame เหล่านี้เป็นรูปแบบ "second brain" — Claude Code เป็นเหมือนเพื่อนร่วมงานที่ไม่เคยลืม syntax หรือโครงสร้าง API</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">15 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">Claude's Skills (SKILL.md)</div>
+        <div class="activity-desc">แนะนำ SKILL.md files — ชุดคำสั่งที่นำมาใช้ซ้ำได้ เก็บไว้ในโปรเจกต์ที่สอน Claude Code วิธีจัดการกับ workflow เฉพาะของทีม Demo สดใน VS Code: สร้าง skill file สำหรับ "สร้าง Jira epic จาก project brief" จากนั้นผู้เข้าร่วมร่าง skill สำหรับงานที่ตนเองทำซ้ำๆ นี่คือสะพานเชื่อมระหว่าง personal tool กับ team asset ที่แชร์ได้ — check ไฟล์เข้า repo แล้วทั้งทีมได้ประโยชน์</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">10 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span><span class="tag tag-new">new</span></div>
+        <div class="activity-name">MCP — connecting Claude Code to your tools</div>
+        <div class="activity-desc">การแนะนำแบบ demo-first สั้นๆ แสดง Claude Code ที่ดึงข้อมูล Jira ticket จริงด้วย ID โดยใช้ Atlassian MCP server — ไม่ต้องคัดลอก ไม่ต้องวาง Claude Code ทำงานโดยตรงใน Jira อธิบาย mental model: MCP คือสิ่งที่ทำให้ Claude Code สามารถ take action ภายในเครื่องมือของคุณได้ ไม่ใช่แค่สร้างข้อความให้คุณ paste<br><br>เก็บรายละเอียด configuration ไว้นอก scope ของเซสชันนี้ — frame ว่า "นี่คือสิ่งที่เป็นไปได้ นี่คือที่ที่ต้องไปต่อ" ชี้ไปที่ <code>docs.claude.com/en/docs/claude-code</code> สำหรับ MCP setup guide</div>
+        <div class="activity-note">เปรียบเทียบให้ชัดเจนกับ product map ของ Session 1: Connectors (Claude.ai) = one-click ไม่ต้องตั้งค่า / MCP (Claude Code) = ต้องตั้งค่าเอง full programmatic control — concept เดียวกัน power level ต่างกัน</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">8 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-concept">concept</span></div>
+        <div class="activity-name">Token efficiency — advanced habits</div>
+        <div class="activity-desc">แนะนำ <code>.claudeignore</code> เพื่อยกเว้นโฟลเดอร์ขนาดใหญ่หรือที่ไม่เกี่ยวข้อง (attachments, exports, archives) ออกจาก context ของ Claude Code แสดงให้เห็นว่า VS Code workspace ที่ scope ดีช่วยลดการใช้ token และให้ผลลัพธ์ที่ focused มากขึ้น กลับมาที่ CLAUDE.md ในฐานะ token-efficiency tool — คำสั่งที่ชัดเจนป้องกัน Claude จากการใช้ token ไปกับการเดาเจตนาของคุณ</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">7 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-orient">orientation</span></div>
+        <div class="activity-name">How to keep learning independently</div>
+        <div class="activity-desc">ชี้ไปที่ <code>docs.claude.com</code> สำหรับเอกสาร Claude Code และ MCP แนะนำ flywheel pattern: หางานที่ทำซ้ำๆ → ขอให้ Claude Code automate → iterate จนถูกต้อง → ทำให้เป็น SKILL.md → แชร์กับทีม ปิดด้วย framing: Claude Code คือ learning accelerator — ทุก script ที่มันเขียนคือคำอธิบายที่คุณสามารถศึกษาได้ด้วย</div>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="time-col"><div class="time-badge">5 min</div></div>
+      <div class="activity-body">
+        <div class="activity-tags"><span class="tag tag-reflect">wrap-up</span></div>
+        <div class="activity-name">Personal commitment</div>
+        <div class="activity-desc">ผู้เข้าร่วมแต่ละคนระบุงานหนึ่งอย่างที่จะ automate ด้วย Claude Code ภายในสองสัปดาห์ข้างหน้า — เขียนลง สร้างความรับผิดชอบโดยไม่กดดัน และให้คุณมีจุดเริ่มต้นสำหรับการติดตามผลตามธรรมชาติ</div>
+      </div>
+    </div>
+
+    <div class="time-bar-wrap">
+      <div class="time-bar-label">Time distribution</div>
+      <div class="time-bar">
+        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
+        <div class="time-bar-seg" style="flex:15;background:#fff7ed;"></div>
+        <div class="time-bar-seg" style="flex:15;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:10;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:8;background:#dbeafe;"></div>
+        <div class="time-bar-seg" style="flex:7;background:#e0e7ff;"></div>
+        <div class="time-bar-seg" style="flex:5;background:#f3f4f6;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PRE-SESSION CHECKLIST ═══ -->
+  <div class="panel" id="pre">
+    <div class="session-hero">
+      <div class="session-stripe s0-color"></div>
+      <div class="session-info">
+        <div class="session-title">Pre-session checklist</div>
+        <div class="session-meta-row">ส่งให้ผู้เข้าร่วมอย่างน้อย 48 ชั่วโมงก่อน Session 1</div>
+        <div class="session-goal"><strong>เป้าหมาย:</strong> มาถึง Session 1 โดยไม่มีสิ่งกีดขวาง เพื่อให้ใช้เวลา 60 นาทีเต็มไปกับการเรียนรู้ ไม่ใช่การแก้ปัญหาบัญชีหรือซอฟต์แวร์ที่ขาดหายไป</div>
+      </div>
+    </div>
+
+    <div class="check-section">
+      <div class="check-section-title">ผู้เข้าร่วมทุกคน</div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
+        <div class="activity-body">
+          <div class="activity-name">ยืนยันการเข้าถึงบัญชี Anthropic</div>
+          <div class="activity-desc">Login เข้า <code>claude.ai</code> และตรวจสอบว่าบัญชีของคุณใช้งานได้ หากคุณใช้ Claude Pro หรือ team plan ให้ยืนยันว่า billing ยังใช้งานอยู่ — Claude Code ดึงจากบัญชีเดิม</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
+        <div class="activity-body">
+          <div class="activity-name">ติดตั้งหรือตรวจสอบ VS Code</div>
+          <div class="activity-desc">ดาวน์โหลด VS Code จาก <code>code.visualstudio.com</code> หากยังไม่ได้ติดตั้ง เปิดขึ้นมาและยืนยันว่า launch ได้ เราจะติดตั้ง Claude Code extension ด้วยกันใน Session 1 แต่ VS Code ต้องพร้อมก่อน</div>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">All</div></div>
+        <div class="activity-body">
+          <div class="activity-name">หาไฟล์งานตัวอย่าง</div>
+          <div class="activity-desc">หาไฟล์หนึ่งไฟล์ที่คุณทำงานด้วยเป็นประจำ — CSV export จาก Jira, board export จาก monday.com, draft จาก Confluence หรือ config file ใดๆ เราจะใช้ไฟล์นี้ใน exercise prompt แรกของ Session 1 ลบข้อมูลส่วนตัวหรือข้อมูลลับก่อนเซสชัน</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-section">
+      <div class="check-section-title">ผู้ใช้ Windows เท่านั้น</div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">Win</div></div>
+        <div class="activity-body">
+          <div class="activity-name">ติดตั้ง Git for Windows</div>
+          <div class="activity-desc">ดาวน์โหลดจาก <code>git-scm.com</code> และติดตั้งด้วย default settings นี่คือ Git Bash ที่ Claude Code ใช้บน native Windows ใช้เวลาไม่ถึง 5 นาที หากไม่แน่ใจ ติดตั้งไว้เลย — ไม่เสียหายอะไร</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-section">
+      <div class="check-section-title">ผู้ใช้ macOS เท่านั้น</div>
+      <div class="activity">
+        <div class="time-col"><div class="time-badge" style="font-size:10px;">Mac</div></div>
+        <div class="activity-body">
+          <div class="activity-name">หา Terminal</div>
+          <div class="activity-desc">Spotlight (Cmd+Space) → พิมพ์ "Terminal" → เปิด ไม่ต้องรันอะไร — แค่ยืนยันว่าหาเจอและเปิดได้ เพื่อหลีกเลี่ยงช่วงเวลา "Terminal อยู่ที่ไหน?" ระหว่างการติดตั้งสด</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <strong>การดำเนินการของผู้สอนก่อน Session 2:</strong> เตรียม sample CSV export จาก Jira หรือ monday.com (10–20 แถว ชื่อคอลัมน์จริง ลบข้อมูลส่วนตัวทั้งหมด) และแชร์ผ่านโฟลเดอร์ของทีม ผู้เข้าร่วมจะใช้ไฟล์นี้ระหว่าง workshop เพื่อไม่ให้ถูก block เรื่อง data access หรือความกังวลด้านความลับในคืนนั้น
+    </div>
+  </div>
+
+</div><!-- /main -->
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
